@@ -1,0 +1,12 @@
+server:
+  port: 9708
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:6000/wealth_trace_dev?ssl=false&stringtype=unspecified"
+    username: "postgres_user"
+    name: "wealth_trace_dev"
+    password: "hfdD4Frjs#ds.dR3Sw"
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
