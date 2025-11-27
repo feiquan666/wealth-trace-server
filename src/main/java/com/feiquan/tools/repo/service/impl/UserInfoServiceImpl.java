@@ -6,5 +6,5 @@ import com.feiquan.tools.repo.service.IUserInfoService;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserInfoServiceImplUserInfoService extends BaseServiceImpl<IUserInfoMapper, UserInfoPO> implements IUserInfoService {
+public class UserInfoServiceImpl extends BaseServiceImpl<IUserInfoMapper, UserInfoPO> implements IUserInfoService {
 }
