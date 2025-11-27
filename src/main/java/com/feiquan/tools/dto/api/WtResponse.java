@@ -44,7 +44,7 @@ public class WtResponse<T> {
         long pages = page.getPages();
         long current = page.getCurrent();
         pageResp.setTotal(total);
-        pageResp.setHasMore(current >= pages);
+        pageResp.setHasMore(current < pages);
         return pageResp;
     }
 
