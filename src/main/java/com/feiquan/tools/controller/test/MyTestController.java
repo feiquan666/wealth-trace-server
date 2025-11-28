@@ -57,7 +57,7 @@ public class MyTestController {
 
     @PostMapping("/user/delete")
     public WtResponse<Boolean> deleteUser(){
-        iUserInfoService.removeById(15);
+        iUserInfoService.removeById(3);
         return WtResponse.success(true);
     }
 }
