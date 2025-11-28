@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @TableName("tb_core.wt_ai_limit_configs")
 @EqualsAndHashCode(callSuper = true)
-public class AiLimitConfig extends BaseEntity {
+public class AiLimitConfigPO extends BaseEntity {
     /// 用户ID
     @TableField("user_id")
     private String userId;

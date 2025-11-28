@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @TableName("tb_core.wt_api_channel_records")
 @EqualsAndHashCode(callSuper = true)
-public class ApiChannelRecord extends BaseEntity {
+public class ApiChannelRecordPO extends BaseEntity {
     /// API请求ID
     @TableField("api_req_id")
     private String apiReqId;

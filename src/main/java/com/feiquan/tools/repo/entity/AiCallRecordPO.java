@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @TableName("tb_core.wt_ai_call_records")
 @EqualsAndHashCode(callSuper = true)
-public class AiCallRecord extends BaseEntity {
+public class AiCallRecordPO extends BaseEntity {
     @TableField("user_id")
     private String userId;
     /// 供应商code

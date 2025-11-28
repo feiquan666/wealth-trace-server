@@ -8,23 +8,21 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+/// 用户自定义Prompt配置表
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("tb_core.wt_ai_provider_prompt_configs")
+@TableName("tb_core.wt_user_customize_prompt")
 @EqualsAndHashCode(callSuper = true)
-public class AiProviderPromptConfig extends BaseEntity {
-    /// 供应商code
-    @TableField("provider_code")
-    private String provider_code;
-    /// 提示词场景
-    @TableField("prompt_scene")
-    private String prompt_scene;
+public class UserCustomizePromptPO extends BaseEntity {
+    /// 用户ID
+    @TableField("user_id")
+    private String userId;
     /// 提示词内容
     @TableField("prompt_content")
-    private String prompt_content;
-    /// 备注
-    @TableField("remark")
-    private String remark;
+    private String promptContent;
+    /// 历史提示词内容
+    @TableField("prompt_content_history")
+    private String promptContentHistory;
 }
