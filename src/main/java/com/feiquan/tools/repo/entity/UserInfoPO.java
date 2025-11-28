@@ -17,6 +17,10 @@ import java.time.OffsetDateTime;
 @TableName("tb_core.wt_user_infos")
 @EqualsAndHashCode(callSuper = true)
 public class UserInfoPO extends BaseEntity {
+    @TableField("user_id")
+    private String userId;
+    @TableField("user_customize_id")
+    private String userCustomizeId;
     @TableField("nick_name")
     private String nickName;
     @TableField("avatar")

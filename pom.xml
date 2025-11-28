@@ -58,6 +58,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.41</version> <!-- 请根据实际情况选择最新版本 -->
+        </dependency>
     </dependencies>
     <build>
         <plugins>
