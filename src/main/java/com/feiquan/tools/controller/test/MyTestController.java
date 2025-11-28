@@ -53,4 +53,11 @@ public class MyTestController {
                 .orderByDesc(BaseEntity::getCreatedAt).orderByDesc(BaseEntity::getId));
         return WtResponse.successPage(page);
     }
+
+
+    @PostMapping("/user/delete")
+    public WtResponse<Boolean> deleteUser(){
+        iUserInfoService.removeById(15);
+        return WtResponse.success(true);
+    }
 }

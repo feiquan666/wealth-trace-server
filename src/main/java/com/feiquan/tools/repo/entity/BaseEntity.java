@@ -30,5 +30,5 @@ public class BaseEntity {
     @TableField("updated_trace_id")
     private String updatedTraceId;
     @TableField("del_flag")
-    private Integer delFlag;
+    private String delFlag;
 }
