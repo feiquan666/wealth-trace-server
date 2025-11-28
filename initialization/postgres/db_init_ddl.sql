@@ -74,7 +74,7 @@ CREATE TABLE tb_core.wt_ai_provider_configs
 );
 
 
-CREATE UNIQUE INDEX idx_wt_ai_provider_configs_code ON tb_core.wt_ai_provider_configs (provider_code);
+CREATE INDEX idx_wt_ai_provider_configs_code ON tb_core.wt_ai_provider_configs (provider_code);
 CREATE INDEX idx_wt_ai_provider_configs_name ON tb_core.wt_ai_provider_configs (provider_name);
 CREATE INDEX idx_wt_ai_provider_configs_desc ON tb_core.wt_ai_provider_configs (provider_desc);
 CREATE INDEX idx_wt_ai_provider_configs_created_trace_id ON tb_core.wt_ai_provider_configs (created_trace_id);

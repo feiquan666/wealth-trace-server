@@ -31,6 +31,7 @@ public class BizAiProviderConfigServiceImpl implements IBizAiProviderConfigServi
         AiProviderConfigPO providerConfig = iAiProviderConfigService.findByCode(code);
         if (Objects.isNull(providerConfig)) {
             providerConfig = req.toPO();
+            iAiProviderConfigService.save(providerConfig);
         }
         return AiProviderResp.fromPO(providerConfig);
     }
