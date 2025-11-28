@@ -7,12 +7,14 @@ import com.feiquan.tools.repo.entity.BaseEntity;
 import com.feiquan.tools.repo.entity.UserInfoPO;
 import com.feiquan.tools.repo.service.IUserInfoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/test")
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ public class MyTestController {
 
     @PostMapping("/user/list")
     public WtResponse<List<UserInfoPO>> allUser(){
+        log.info("list");
         List<UserInfoPO> list = iUserInfoService.list(new QueryWrapper<UserInfoPO>().lambda()
                 .orderByDesc(BaseEntity::getCreatedAt).orderByDesc(BaseEntity::getId));
         return WtResponse.success(list);
