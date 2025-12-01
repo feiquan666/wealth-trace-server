@@ -1,6 +1,8 @@
 server:
   port: 9708
 spring:
+  jackson:
+    default-property-inclusion: non_null
   datasource:
     url: "jdbc:postgresql://localhost:6000/wealth_trace_dev?ssl=false&stringtype=unspecified"
     username: "postgres_user"

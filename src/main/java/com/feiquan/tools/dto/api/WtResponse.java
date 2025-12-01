@@ -14,6 +14,7 @@ import java.util.Objects;
 public class WtResponse<T> {
 
     /// 响应码
+    ///
     /// @see com.feiquan.tools.constant.WtRespCode
     private String code;
     private String msg;
@@ -63,13 +64,58 @@ public class WtResponse<T> {
                 .build();
     }
 
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
+    @Getter
     public static class ErrorDetail {
-        private String field;
-        private String msg;
+        private final String field;
+        private final String msg;
+
+        private ErrorDetail(String field, String msg) {
+            this.field = field;
+            this.msg = msg;
+        }
+
+        public static ErrorDetail of(String field, String msg, Object... args) {
+            if (Objects.nonNull(args) && args.length > 0) {
+                // 实现 {} 占位符替换
+                return new ErrorDetail(field, formatWithBraces(msg, args));
+            }
+            return new ErrorDetail(field, msg);
+        }
+
+        private static String formatWithBraces(String template, Object... args) {
+            if (template == null || template.isEmpty()) {
+                return template;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            int argIndex = 0;
+            int cursor = 0;
+
+            while (cursor < template.length()) {
+                int brace = template.indexOf("{}", cursor);
+                if (brace == -1) {
+                    // no more placeholders
+                    sb.append(template.substring(cursor));
+                    break;
+                }
+
+                // append text before placeholder
+                sb.append(template, cursor, brace);
+
+                // append arg if exists
+                if (argIndex < args.length) {
+                    sb.append(args[argIndex++]);
+                } else {
+                    sb.append("{}"); // no arg left
+                }
+
+                cursor = brace + 2; // skip {}
+            }
+
+            return sb.toString();
+        }
+
+
     }
 
 }

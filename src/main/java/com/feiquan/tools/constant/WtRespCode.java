@@ -12,7 +12,13 @@ public record WtRespCode(String code, String msg) {
     }
 
     public static WtRespCode failedWithException(Exception e) {
-        return new WtRespCode(Failed.code(), e.getMessage());
+        String exCode;
+        if (e instanceof WtException wtE) {
+            exCode = wtE.getCode();
+        } else {
+            exCode = Failed.code();
+        }
+        return new WtRespCode(exCode, e.getMessage());
     }
 
     public WtRespCode createWithMsg(String msg) {

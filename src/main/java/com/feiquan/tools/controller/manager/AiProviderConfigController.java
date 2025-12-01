@@ -5,11 +5,14 @@ import com.feiquan.tools.biz.IBizAiProviderConfigService;
 import com.feiquan.tools.dto.api.WtResponse;
 import com.feiquan.tools.dto.api.req.AiProviderCreateReq;
 import com.feiquan.tools.dto.api.resp.AiProviderResp;
+import com.feiquan.tools.util.ExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Slf4j
@@ -22,6 +25,8 @@ public class AiProviderConfigController {
 
     @PostMapping("/create")
     public WtResponse<AiProviderResp> createAiProvider(@RequestBody @Validated AiProviderCreateReq createReq){
+        String code = createReq.getCode();
+        ExceptionUtil.throwException(StringUtils.equals("deepseek", code), "code", "非法的AI提供商code：{}，出错时间：{}", code, OffsetDateTime.now());
         return WtResponse.success(iBizAiProviderConfigService.createAiProvider(createReq));
     }
 

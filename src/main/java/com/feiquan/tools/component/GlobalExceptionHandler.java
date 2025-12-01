@@ -1,5 +1,6 @@
 package com.feiquan.tools.component;
 
+import com.feiquan.tools.constant.WtException;
 import com.feiquan.tools.constant.WtRespCode;
 import com.feiquan.tools.dto.api.WtResponse;
 import com.google.common.collect.Lists;
@@ -24,23 +25,20 @@ public class GlobalExceptionHandler {
         ex.getBindingResult()
                 .getFieldErrors()
                 .forEach(err -> {
-                    WtResponse.ErrorDetail detail = WtResponse.ErrorDetail.builder()
-                            .field(err.getField())
-                            .msg(err.getDefaultMessage())
-                            .build();
+                    WtResponse.ErrorDetail detail = WtResponse.ErrorDetail.of(err.getField(), err.getDefaultMessage());
                     errorDetails.add(detail);
                 });
         // 返回统一失败响应，包含错误明细
-        return WtResponse.failed(WtRespCode.Failed, errorDetails);
+        return WtResponse.failed(WtRespCode.ParameterExp, errorDetails);
     }
 
     /**
      * 捕获自定义业务异常（可选）
      */
-//    @ExceptionHandler(BusinessException.class)
-//    public WtResponse<?> handleBusinessException(BusinessException ex) {
-//        return WtResponse.fail(ex.getCode(), ex.getMessage());
-//    }
+    @ExceptionHandler(WtException.class)
+    public WtResponse<?> handleBusinessException(WtException ex) {
+        return WtResponse.failed(WtRespCode.failedWithException(ex), ex.getErrorDetails());
+    }
 
     /**
      * 捕获所有未处理的异常
