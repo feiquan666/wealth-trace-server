@@ -1,5 +1,9 @@
 package com.feiquan.tools.constant;
 
+import com.feiquan.tools.util.WtStringUtil;
+
+import java.util.Objects;
+
 public record WtRespCode(String code, String msg) {
 
     public static WtRespCode Succeed = new WtRespCode("0000", "succeed");
@@ -7,7 +11,11 @@ public record WtRespCode(String code, String msg) {
     public static WtRespCode SystemExp = new WtRespCode("0500", "内部系统异常");
     public static WtRespCode Failed = new WtRespCode("9999", "failed");
 
-    public static WtRespCode failedWithMsg(String msg) {
+    public static WtRespCode failedWithMsg(String msg, Object... args) {
+        if (Objects.nonNull(args) && args.length > 0) {
+            // 实现 {} 占位符替换
+            return new WtRespCode(Failed.code(), WtStringUtil.formatWithBraces(msg, args));
+        }
         return new WtRespCode(Failed.code(), msg);
     }
 

@@ -1,12 +1,12 @@
 package com.feiquan.tools.biz.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.feiquan.tools.biz.IBizAiProviderConfigService;
 import com.feiquan.tools.dto.api.req.AiProviderCreateReq;
 import com.feiquan.tools.dto.api.resp.AiProviderResp;
 import com.feiquan.tools.repo.entity.AiProviderConfigPO;
 import com.feiquan.tools.repo.service.IAiProviderConfigService;
+import com.feiquan.tools.util.ExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +29,7 @@ public class BizAiProviderConfigServiceImpl implements IBizAiProviderConfigServi
     public AiProviderResp createAiProvider(AiProviderCreateReq req) {
         String code = req.getCode();
         AiProviderConfigPO providerConfig = iAiProviderConfigService.findByCode(code);
+        ExceptionUtil.throwException(Objects.nonNull(providerConfig), "{} AI 服务商已存在，不能重复创建", code);
         if (Objects.isNull(providerConfig)) {
             providerConfig = req.toPO();
             iAiProviderConfigService.save(providerConfig);
@@ -40,11 +41,12 @@ public class BizAiProviderConfigServiceImpl implements IBizAiProviderConfigServi
     public AiProviderResp updateAiProvider(AiProviderCreateReq req) {
         String code = req.getCode();
         AiProviderConfigPO providerConfig = iAiProviderConfigService.findByCode(code);
-        // todo 跑异常表
-        if (Objects.isNull(providerConfig)) {
-            return null;
-        }
-        return null;
+        ExceptionUtil.throwException(Objects.isNull(providerConfig), "不存在的 AI服务提供商:{}", code);
+        providerConfig.setProviderName(req.getName());
+        providerConfig.setProviderDesc(req.getDescription());
+        providerConfig.setSecretKey(req.getSecretKey());
+        iAiProviderConfigService.updateById(providerConfig);
+        return AiProviderResp.fromPO(providerConfig);
     }
 
     @Override

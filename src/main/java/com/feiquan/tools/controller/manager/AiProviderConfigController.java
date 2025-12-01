@@ -5,14 +5,12 @@ import com.feiquan.tools.biz.IBizAiProviderConfigService;
 import com.feiquan.tools.dto.api.WtResponse;
 import com.feiquan.tools.dto.api.req.AiProviderCreateReq;
 import com.feiquan.tools.dto.api.resp.AiProviderResp;
-import com.feiquan.tools.util.ExceptionUtil;
+import com.feiquan.tools.util.JsonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @Slf4j
@@ -24,24 +22,34 @@ public class AiProviderConfigController {
     private final IBizAiProviderConfigService iBizAiProviderConfigService;
 
     @PostMapping("/create")
-    public WtResponse<AiProviderResp> createAiProvider(@RequestBody @Validated AiProviderCreateReq createReq){
-        String code = createReq.getCode();
-        ExceptionUtil.throwException(StringUtils.equals("deepseek", code), "code", "非法的AI提供商code：{}，出错时间：{}", code, OffsetDateTime.now());
-        return WtResponse.success(iBizAiProviderConfigService.createAiProvider(createReq));
+    public WtResponse<AiProviderResp> createAiProvider(@RequestBody @Validated AiProviderCreateReq createReq) {
+        log.info("创建AI提供服务商请求参数：{}", createReq);
+        AiProviderResp resp = iBizAiProviderConfigService.createAiProvider(createReq);
+        log.info("创建AI提供服务商响应参数：{}", resp);
+        return WtResponse.success(resp);
     }
 
     @PutMapping("/update")
-    public WtResponse<AiProviderResp> updateAiProvider(@RequestBody @Validated AiProviderCreateReq updateReq){
-        return WtResponse.success(iBizAiProviderConfigService.updateAiProvider(updateReq));
+    public WtResponse<AiProviderResp> updateAiProvider(@RequestBody @Validated AiProviderCreateReq updateReq) {
+        log.info("更新AI提供服务商请求参数：{}", updateReq);
+        AiProviderResp resp = iBizAiProviderConfigService.updateAiProvider(updateReq);
+        log.info("更新AI提供服务商响应参数：{}", resp);
+        return WtResponse.success(resp);
     }
 
     @PostMapping("/queryAll")
-    public WtResponse<List<AiProviderResp>> queryAll(){
-        return WtResponse.success(iBizAiProviderConfigService.queryAllAiProvider());
+    public WtResponse<List<AiProviderResp>> queryAll() {
+        log.info("查询全部AI提供服务商请求");
+        List<AiProviderResp> resp = iBizAiProviderConfigService.queryAllAiProvider();
+        log.info("查询全部AI提供服务商请求响应结果：{}", JsonUtil.toJson(resp));
+        return WtResponse.success(resp);
     }
 
     @DeleteMapping("/delete")
-    public WtResponse<Boolean> deleteAiProvider(@RequestParam("code") String code){
-        return WtResponse.success(iBizAiProviderConfigService.deleteAiProvider(code));
+    public WtResponse<Boolean> deleteAiProvider(@RequestParam("code") String code) {
+        log.info("删除AI提供服务商请求参数：{}", code);
+        Boolean resp = iBizAiProviderConfigService.deleteAiProvider(code);
+        log.info("删除AI提供服务商请求结果：{}", resp);
+        return WtResponse.success(resp);
     }
 }
