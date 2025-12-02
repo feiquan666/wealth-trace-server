@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+/// AI 调用记录表
 @Data
 @SuperBuilder
 @NoArgsConstructor

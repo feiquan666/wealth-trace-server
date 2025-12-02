@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.OffsetDateTime;
 
+/// 用户信息表
 @Data
 @SuperBuilder
 @NoArgsConstructor

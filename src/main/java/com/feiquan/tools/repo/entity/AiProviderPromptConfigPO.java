@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+/// AI 提示词
 @Data
 @SuperBuilder
 @NoArgsConstructor
