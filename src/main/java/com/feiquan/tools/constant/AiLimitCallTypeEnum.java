@@ -6,10 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 public enum AiLimitCallTypeEnum {
 
-    Undefined("undefined", "KYC Submission Time"),
+    Undefined("undefined", "undefined"),
     User("user", "用户"),
     System("system", "系统"),
-
     ;
 
     private final String code;

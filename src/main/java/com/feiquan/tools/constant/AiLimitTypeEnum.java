@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 public enum AiLimitTypeEnum {
 
-    Undefined("undefined", "KYC Submission Time"),
+    Undefined("undefined", "undefined"),
     Hour("hour", "基于小时"),
     Day("day", "基于天"),
     Month("month", "基于月"),
